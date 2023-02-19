@@ -5,11 +5,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection = "pet")
+@Document("pet")
 public class Pet {
 
     @Id
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -21,19 +21,29 @@ public class Pet {
 
     private Integer weightInPounds;
 
-    private Boolean isAllergic;
+    private String breedId;
 
-    private Long breedId;
+    private String specieId;
 
-    private Long specieId;
+    private String clientId;
 
-    private Long clientId;
+    public Pet(String id, String name, Date birthDate, String sex, String color, Integer weightInPounds, String breedId, String specieId, String clientId) {
+        this.id = id;
+        this.name = name;
+        this.birthDate = birthDate;
+        this.sex = sex;
+        this.color = color;
+        this.weightInPounds = weightInPounds;
+        this.breedId = breedId;
+        this.specieId = specieId;
+        this.clientId = clientId;
+    }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -77,35 +87,27 @@ public class Pet {
         this.weightInPounds = weightInPounds;
     }
 
-    public Boolean getAllergic() {
-        return isAllergic;
-    }
-
-    public void setAllergic(Boolean allergic) {
-        isAllergic = allergic;
-    }
-
-    public Long getBreedId() {
+    public String getBreedId() {
         return breedId;
     }
 
-    public void setBreedId(Long breedId) {
+    public void setBreedId(String breedId) {
         this.breedId = breedId;
     }
 
-    public Long getSpecieId() {
+    public String getSpecieId() {
         return specieId;
     }
 
-    public void setSpecieId(Long specieId) {
+    public void setSpecieId(String specieId) {
         this.specieId = specieId;
     }
 
-    public Long getClientId() {
+    public String getClientId() {
         return clientId;
     }
 
-    public void setClientId(Long clientId) {
+    public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 }
