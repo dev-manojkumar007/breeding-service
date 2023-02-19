@@ -3,21 +3,27 @@ package com.ideathon.breedingservice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "specie")
+@Document("specie")
 public class Specie {
 
     @Id
-    private Long id;
+    private String id;
 
     private String code;
 
     private String name;
 
-    public Long getId() {
+    public Specie(String id, String code, String name) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

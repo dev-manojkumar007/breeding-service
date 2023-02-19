@@ -4,22 +4,26 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "practice")
+@Document("practice")
 public class Practice {
 
-    private Long id;
+    private String id;
 
     private String name;
 
     private Long addressId;
 
-    private List<Client> clients;
+    public Practice(String id, String name, Long addressId) {
+        this.id = id;
+        this.name = name;
+        this.addressId = addressId;
+    }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -37,13 +41,5 @@ public class Practice {
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
-    }
-
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
     }
 }

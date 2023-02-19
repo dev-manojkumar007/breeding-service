@@ -3,11 +3,11 @@ package com.ideathon.breedingservice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "address")
+@Document("address")
 public class Address {
 
     @Id
-    private Long id;
+    private String id;
 
     private String address1;
 
@@ -23,11 +23,22 @@ public class Address {
 
     private String countryCode;
 
-    public Long getId() {
+    public Address(String id, String address1, String address2, String address3, String city, String state, String zip, String countryCode) {
+        this.id = id;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.address3 = address3;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.countryCode = countryCode;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

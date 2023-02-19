@@ -3,13 +3,11 @@ package com.ideathon.breedingservice.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-
-@Document(collection = "client")
+@Document("client")
 public class Client {
 
     @Id
-    private Long id;
+    private String id;
 
     private String email;
 
@@ -19,23 +17,25 @@ public class Client {
 
     private String lastName;
 
-    private String password;
+    private String practiceId;
 
-    private Long practiceId;
+    private String defaultAddressId;
 
-    private Long defaultAddressId;
+    public Client(String id, String email, String username, String firstName, String lastName, String practiceId, String defaultAddressId) {
+        this.id = id;
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.practiceId = practiceId;
+        this.defaultAddressId = defaultAddressId;
+    }
 
-    private List<Address> addresses;
-
-    private List<Pet> pets;
-
-    private List<Message> messages;
-
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -71,51 +71,19 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Long getPracticeId() {
+    public String getPracticeId() {
         return practiceId;
     }
 
-    public void setPracticeId(Long practiceId) {
+    public void setPracticeId(String practiceId) {
         this.practiceId = practiceId;
     }
 
-    public Long getDefaultAddressId() {
+    public String getDefaultAddressId() {
         return defaultAddressId;
     }
 
-    public void setDefaultAddressId(Long defaultAddressId) {
+    public void setDefaultAddressId(String defaultAddressId) {
         this.defaultAddressId = defaultAddressId;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
-
-    public List<Pet> getPets() {
-        return pets;
-    }
-
-    public void setPets(List<Pet> pets) {
-        this.pets = pets;
-    }
-
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
     }
 }
