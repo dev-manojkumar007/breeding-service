@@ -1,69 +1,85 @@
 package com.ideathon.breedingservice.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.bson.types.Binary;
 
-@Document("address")
+import java.util.Date;
+
 public class Address {
 
-    @Id
-    private String id;
-
-    private String address1;
-
-    private String address2;
-
-    private String address3;
-
+    private Binary addressKey;
+    private String addressTypeCode;
+    private String line1;
+    private String line2;
+    private String line3;
     private String city;
+    private String stateOrProvince;
+    private String postalCode;
+    private String country;
+    private Boolean isDeleted;
+    private Boolean isAddressVerified;
+    private String phoneNumber;
+    private String phoneExtension;
+    private String phoneItuNumber;
+    private Date createdDate;
+    private Date modifiedDate;
 
-    private String state;
-
-    private String zip;
-
-    private String countryCode;
-
-    public Address(String id, String address1, String address2, String address3, String city, String state, String zip, String countryCode) {
-        this.id = id;
-        this.address1 = address1;
-        this.address2 = address2;
-        this.address3 = address3;
+    public Address(Binary addressKey, String addressTypeCode, String line1, String line2, String line3, String city, String stateOrProvince, String postalCode, String country, Boolean isDeleted, Boolean isAddressVerified, String phoneNumber, String phoneExtension, String phoneItuNumber, Date createdDate, Date modifiedDate) {
+        this.addressKey = addressKey;
+        this.addressTypeCode = addressTypeCode;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.line3 = line3;
         this.city = city;
-        this.state = state;
-        this.zip = zip;
-        this.countryCode = countryCode;
+        this.stateOrProvince = stateOrProvince;
+        this.postalCode = postalCode;
+        this.country = country;
+        this.isDeleted = isDeleted;
+        this.isAddressVerified = isAddressVerified;
+        this.phoneNumber = phoneNumber;
+        this.phoneExtension = phoneExtension;
+        this.phoneItuNumber = phoneItuNumber;
+        this.createdDate = createdDate;
+        this.modifiedDate = modifiedDate;
     }
 
-    public String getId() {
-        return id;
+    public Binary getAddressKey() {
+        return addressKey;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setAddressKey(Binary addressKey) {
+        this.addressKey = addressKey;
     }
 
-    public String getAddress1() {
-        return address1;
+    public String getAddressTypeCode() {
+        return addressTypeCode;
     }
 
-    public void setAddress1(String address1) {
-        this.address1 = address1;
+    public void setAddressTypeCode(String addressTypeCode) {
+        this.addressTypeCode = addressTypeCode;
     }
 
-    public String getAddress2() {
-        return address2;
+    public String getLine1() {
+        return line1;
     }
 
-    public void setAddress2(String address2) {
-        this.address2 = address2;
+    public void setLine1(String line1) {
+        this.line1 = line1;
     }
 
-    public String getAddress3() {
-        return address3;
+    public String getLine2() {
+        return line2;
     }
 
-    public void setAddress3(String address3) {
-        this.address3 = address3;
+    public void setLine2(String line2) {
+        this.line2 = line2;
+    }
+
+    public String getLine3() {
+        return line3;
+    }
+
+    public void setLine3(String line3) {
+        this.line3 = line3;
     }
 
     public String getCity() {
@@ -74,27 +90,83 @@ public class Address {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+    public String getStateOrProvince() {
+        return stateOrProvince;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStateOrProvince(String stateOrProvince) {
+        this.stateOrProvince = stateOrProvince;
     }
 
-    public String getZip() {
-        return zip;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Boolean getAddressVerified() {
+        return isAddressVerified;
+    }
+
+    public void setAddressVerified(Boolean addressVerified) {
+        isAddressVerified = addressVerified;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneExtension() {
+        return phoneExtension;
+    }
+
+    public void setPhoneExtension(String phoneExtension) {
+        this.phoneExtension = phoneExtension;
+    }
+
+    public String getPhoneItuNumber() {
+        return phoneItuNumber;
+    }
+
+    public void setPhoneItuNumber(String phoneItuNumber) {
+        this.phoneItuNumber = phoneItuNumber;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
     }
 }
