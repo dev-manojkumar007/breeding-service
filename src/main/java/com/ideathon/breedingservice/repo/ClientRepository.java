@@ -1,11 +1,24 @@
 package com.ideathon.breedingservice.repo;
 
-import com.ideathon.breedingservice.model.Client;
-import org.bson.types.Binary;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
-public interface ClientRepository extends MongoRepository<Client, Binary> {
+import com.ideathon.breedingservice.dao.MongoDbConnection;
+import com.ideathon.breedingservice.model.Client;
+import com.mongodb.MongoException;
+import com.mongodb.client.FindIterable;
 
+@Repository
+public class ClientRepository {
+	
+	@Autowired
+	MongoDbConnection mongoDbConnection;
+	
+	public List<Client> findAll(){
+			return mongoDbConnection.getClient();
+    }
 }

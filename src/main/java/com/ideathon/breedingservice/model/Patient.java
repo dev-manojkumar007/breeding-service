@@ -1,40 +1,41 @@
 package com.ideathon.breedingservice.model;
 
-import org.bson.types.Binary;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.util.Date;
 import java.util.List;
+
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.Binary;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("Patient")
 public class Patient {
 
-    @Id
-    private Binary id;
-    private Integer version;
-    private Binary practiceKey;
-    private String name;
-    private List<Object> clients;
-    private String speciesCode;
-    private String weight;
-    private String weightUnitCode;
-    private String sexCode;
-    private Boolean isAltered;
-    private Date dateOfBirth;
-    private Binary primaryVeterinarianKey;
-    private Boolean isActive;
-    private String breedCode;
-    private String knownAllergies;
-    private String otherMedications;
-    private String healthConditions;
-    private Date createdDate;
-    private Date modifiedDate;
-    private String documentVersion;
-    private String alteredStatusCode;
-    private String originTypeCode;
+	public Patient() {}
+	
+    @BsonProperty("_id") private Binary id;
+    @BsonProperty("version") private Integer version;
+    @BsonProperty("practiceKey") private Binary practiceKey;
+    @BsonProperty("name") private String name;
+    @BsonProperty("clients") private List<Clients> clients;
+    @BsonProperty("speciesCode") private String speciesCode;
+    @BsonProperty("weight") private String weight;
+    @BsonProperty("weightUnitCode") private String weightUnitCode;
+    @BsonProperty("sexCode") private String sexCode;
+    @BsonProperty("isAltered") private Boolean isAltered;
+    @BsonProperty("dateOfBirth") private Date dateOfBirth;
+    @BsonProperty("primaryVeterinarianKey") private Binary primaryVeterinarianKey;
+    @BsonProperty("isActive") private Boolean isActive;
+    @BsonProperty("breedCode") private String breedCode;
+    @BsonProperty("knownAllergies") private String knownAllergies;
+    @BsonProperty("otherMedications") private String otherMedications;
+    @BsonProperty("healthConditions") private String healthConditions;
+    @BsonProperty("createdDate") private Date createdDate;
+    @BsonProperty("modifiedDate") private Date modifiedDate;
+    @BsonProperty("documentVersion") private String documentVersion;
+    @BsonProperty("alteredStatusCode") private String alteredStatusCode;
+    @BsonProperty("originTypeCode") private String originTypeCode;
 
-    public Patient(Binary id, Integer version, Binary practiceKey, String name, List<Object> clients, String speciesCode, String weight, String weightUnitCode, String sexCode, Boolean isAltered, Date dateOfBirth, Binary primaryVeterinarianKey, Boolean isActive, String breedCode, String knownAllergies, String otherMedications, String healthConditions, Date createdDate, Date modifiedDate, String documentVersion, String alteredStatusCode, String originTypeCode) {
+    public Patient(Binary id, Integer version, Binary practiceKey, String name, List<Clients> clients, String speciesCode, String weight, String weightUnitCode, String sexCode, Boolean isAltered, Date dateOfBirth, Binary primaryVeterinarianKey, Boolean isActive, String breedCode, String knownAllergies, String otherMedications, String healthConditions, Date createdDate, Date modifiedDate, String documentVersion, String alteredStatusCode, String originTypeCode) {
         this.id = id;
         this.version = version;
         this.practiceKey = practiceKey;
@@ -91,11 +92,11 @@ public class Patient {
         this.name = name;
     }
 
-    public List<Object> getClients() {
+    public List<Clients> getClients() {
         return clients;
     }
 
-    public void setClients(List<Object> clients) {
+    public void setClients(List<Clients> clients) {
         this.clients = clients;
     }
 
@@ -234,4 +235,5 @@ public class Patient {
     public void setOriginTypeCode(String originTypeCode) {
         this.originTypeCode = originTypeCode;
     }
+
 }
