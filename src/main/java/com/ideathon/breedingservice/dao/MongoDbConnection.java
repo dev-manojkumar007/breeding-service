@@ -49,17 +49,18 @@ public class MongoDbConnection {
 	}	
 	
 	public List<Client> getClient() {
+		CodecRegistry pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+                fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+		
+		
 		try (MongoClient mongoClient = MongoClients.create(uri)) {
-            MongoDatabase database = mongoClient.getDatabase(db);
-    		List<Client> listPatient = new ArrayList<>();
+            MongoDatabase database = mongoClient.getDatabase(db).withCodecRegistry(pojoCodecRegistry);
+            Document query = new Document();
+
+            List<Client> listClient = database.getCollection("client").find(query, Client.class).into(new ArrayList());            
+
             
-            FindIterable<Document> itrDocs = database.getCollection("client").find();            
-            Iterator it = itrDocs.iterator();
-            while(it.hasNext()) {
-            	listPatient.add((Client)it.next());
-            }
-            
-            return listPatient;
+            return listClient;
             } catch (MongoException me) {
                 System.err.println("An error occurred while attempting to run a command: " + me);
             }
