@@ -1,5 +1,6 @@
 package com.ideathon.breedingservice.model;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.Binary;
 
 import java.util.Date;
@@ -7,12 +8,16 @@ import java.util.List;
 
 public class EmailAddress {
 
-    private Binary emailAddressKey;
-    private List<String> emailAddressTypeCodes;
-    private String address;
-    private Boolean isDeleted;
-    private Date createdDate;
-    private Date modifiedDate;
+    @BsonProperty("emailAddressKey") private Binary emailAddressKey;
+    @BsonProperty("emailAddressTypeCodes") private List<String> emailAddressTypeCodes;
+    @BsonProperty("address") private String address;
+    @BsonProperty("isDeleted") private Boolean isDeleted;
+    @BsonProperty("createdDate") private Date createdDate;
+    @BsonProperty("modifiedDate") private Date modifiedDate;
+    
+    public EmailAddress() {
+		// TODO Auto-generated constructor stub
+	}
 
     public EmailAddress(Binary emailAddressKey, List<String> emailAddressTypeCodes, String address, Boolean isDeleted, Date createdDate, Date modifiedDate) {
         this.emailAddressKey = emailAddressKey;

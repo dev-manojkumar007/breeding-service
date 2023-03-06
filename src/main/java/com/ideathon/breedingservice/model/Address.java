@@ -1,28 +1,31 @@
 package com.ideathon.breedingservice.model;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.Binary;
 
 import java.util.Date;
 
 public class Address {
 
-    private Binary addressKey;
-    private String addressTypeCode;
-    private String line1;
-    private String line2;
-    private String line3;
-    private String city;
-    private String stateOrProvince;
-    private String postalCode;
-    private String country;
-    private Boolean isDeleted;
-    private Boolean isAddressVerified;
-    private String phoneNumber;
-    private String phoneExtension;
-    private String phoneItuNumber;
-    private Date createdDate;
-    private Date modifiedDate;
+    @BsonProperty("addressKey") private Binary addressKey;
+    @BsonProperty("addressTypeCode") private String addressTypeCode;
+    @BsonProperty("line1") private String line1;
+    @BsonProperty("line2") private String line2;
+    @BsonProperty("line3") private String line3;
+    @BsonProperty("city") private String city;
+    @BsonProperty("stateOrProvince") private String stateOrProvince;
+    @BsonProperty("postalCode") private String postalCode;
+    @BsonProperty("country") private String country;
+    @BsonProperty("isDeleted") private Boolean isDeleted;
+    @BsonProperty("isAddressVerified") private Boolean isAddressVerified;
+    @BsonProperty("phoneNumber") private String phoneNumber;
+    @BsonProperty("phoneExtension") private String phoneExtension;
+    @BsonProperty("phoneItuNumber") private String phoneItuNumber;
+    @BsonProperty("createdDate") private Date createdDate;
+    @BsonProperty("modifiedDate") private Date modifiedDate;
 
+    public Address() {}  
+    
     public Address(Binary addressKey, String addressTypeCode, String line1, String line2, String line3, String city, String stateOrProvince, String postalCode, String country, Boolean isDeleted, Boolean isAddressVerified, String phoneNumber, String phoneExtension, String phoneItuNumber, Date createdDate, Date modifiedDate) {
         this.addressKey = addressKey;
         this.addressTypeCode = addressTypeCode;

@@ -1,20 +1,23 @@
 package com.ideathon.breedingservice.model;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
 import org.bson.types.Binary;
 
 import java.util.Date;
 
 public class PhoneNumber {
 
-    private Binary phoneKey;
-    private String phoneTypeCode;
-    private String number;
-    private String extension;
-    private String ituNumber;
-    private Date createdDate;
-    private Date modifiedDate;
-    private Boolean isDeleted;
-    private Boolean messaging;
+    @BsonProperty("phoneKey") private Binary phoneKey;
+    @BsonProperty("phoneTypeCode") private String phoneTypeCode;
+    @BsonProperty("number") private String number;
+    @BsonProperty("extension") private String extension;
+    @BsonProperty("ituNumber") private String ituNumber;
+    @BsonProperty("createdDate") private Date createdDate;
+    @BsonProperty("modifiedDate") private Date modifiedDate;
+    @BsonProperty("isDeleted") private Boolean isDeleted;
+    @BsonProperty("messaging") private Boolean messaging;
+    
+    public PhoneNumber() {}
 
     public PhoneNumber(Binary phoneKey, String phoneTypeCode, String number, String extension, String ituNumber, Date createdDate, Date modifiedDate, Boolean isDeleted, Boolean messaging) {
         this.phoneKey = phoneKey;
