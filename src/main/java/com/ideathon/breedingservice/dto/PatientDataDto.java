@@ -9,6 +9,10 @@ public class PatientDataDto {
     private String specieCode;
     private String sexCode;
     private int age;
+    private String breedCode;
+    private String healthCondition;
+    private String allergies;
+    private String weight;
 
     public Binary getPatientId() {
         return patientId;
@@ -49,4 +53,37 @@ public class PatientDataDto {
     public void setAge(int age) {
         this.age = age;
     }
-}
+
+	public String getBreedCode() {
+		return breedCode;
+	}
+
+	public void setBreedCode(String breedCode) {
+		this.breedCode = breedCode;
+	}
+
+	public String getHealthCondition() {
+		return healthCondition;
+	}
+
+	public void setHealthCondition(String healthCondition) {
+		this.healthCondition = healthCondition;
+	}
+
+	public String getAllergies() {
+		return allergies;
+	}
+
+	public void setAllergies(String allergies) {
+		this.allergies = allergies;
+	}
+
+	public String getWeight() {
+		return weight;
+	}
+
+	public void setWeight(String weight) {
+		this.weight = weight;
+	}
+    
+ }

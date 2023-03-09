@@ -11,8 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("Patient")
 public class Patient {
 
-	public Patient() {}
-	
 		@Id 
 	 private Binary id;
      private Integer version;

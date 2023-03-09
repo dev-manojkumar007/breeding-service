@@ -11,33 +11,31 @@ import java.util.List;
 @Document("client")
 public class Client {
 
-    @BsonProperty("_id") private Binary id;
-    @BsonProperty("version") private Integer version;
-    @BsonProperty("documentVersion") private String documentVersion;
-    @BsonProperty("practiceKey") private Binary practiceKey;
-    @BsonProperty("clientEmailPracticeKey") private String clientEmailPracticeKey;
-    @BsonProperty("title") private String title;
-    @BsonProperty("prefix") private String prefix;
-    @BsonProperty("givenName") private String givenName;
-    @BsonProperty("middleName") private String middleName;
-    @BsonProperty("familyName") private String familyName;
-    @BsonProperty("primaryEmailAddressKey") private Binary primaryEmailAddressKey;
-    @BsonProperty("emailAddresses") private List<EmailAddress> emailAddresses;
-    @BsonProperty("preferredContactMethodCode") private String preferredContactMethodCode;
-    @BsonProperty("primaryPhoneKey") private Binary primaryPhoneKey;
-    @BsonProperty("primaryAddressKey") private Binary primaryAddressKey;
-    @BsonProperty("phoneNumbers") private List<PhoneNumber> phoneNumbers;
-    @BsonProperty("addresses") private List<Address> addresses;
-    @BsonProperty("isActive") private Boolean isActive;
-    @BsonProperty("acceptsGenerics") private Boolean acceptsGenerics;
-    @BsonProperty("dateOfBirth") private Date dateOfBirth;
-    @BsonProperty("originTypeCode") private String originTypeCode;
-    @BsonProperty("createdDate") private Date createdDate;
-    @BsonProperty("modifiedDate") private Date modifiedDate;
+	@Id
+    private Binary id;
+    private Integer version;
+    private String documentVersion;
+    private Binary practiceKey;
+    private String clientEmailPracticeKey;
+    private String title;
+    private String prefix;
+    private String givenName;
+    private String middleName;
+    private String familyName;
+    private Binary primaryEmailAddressKey;
+    private List<EmailAddress> emailAddresses;
+    private String preferredContactMethodCode;
+    private Binary primaryPhoneKey;
+    private Binary primaryAddressKey;
+    private List<PhoneNumber> phoneNumbers;
+    private List<Address> addresses;
+    private Boolean isActive;
+    private Boolean acceptsGenerics;
+    private Date dateOfBirth;
+    private String originTypeCode;
+    private Date createdDate;
+    private Date modifiedDate;
 
-    public Client() {
-		// TODO Auto-generated constructor stub
-	}
     public Client(Binary id, Integer version, String documentVersion, Binary practiceKey, String clientEmailPracticeKey, String title, String prefix, String givenName, String middleName, String familyName, Binary primaryEmailAddressKey, List<EmailAddress> emailAddresses, String preferredContactMethodCode, Binary primaryPhoneKey, Binary primaryAddressKey, List<PhoneNumber> phoneNumbers, List<Address> addresses, Boolean isActive, Boolean acceptsGenerics, Date dateOfBirth, String originTypeCode, Date createdDate, Date modifiedDate) {
         this.id = id;
         this.version = version;
