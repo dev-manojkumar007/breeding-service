@@ -1,28 +1,28 @@
 package com.ideathon.breedingservice.service;
 
-import com.ideathon.breedingservice.dto.ClientDataDto;
-import com.ideathon.breedingservice.dto.PatientDataDto;
-import com.ideathon.breedingservice.model.Client;
-import com.ideathon.breedingservice.model.Patient;
-import com.ideathon.breedingservice.repo.ClientRepository;
-import com.ideathon.breedingservice.repo.PatientRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.bson.types.Binary;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.bson.types.Binary;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Component;
+
+import com.ideathon.breedingservice.dto.ClientDataDto;
+import com.ideathon.breedingservice.dto.PatientDataDto;
+import com.ideathon.breedingservice.model.Client;
+import com.ideathon.breedingservice.model.Patient;
+import com.ideathon.breedingservice.repo.ClientRepository;
+import com.ideathon.breedingservice.repo.PatientRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
@@ -162,7 +162,7 @@ public class CentralService {
 		LocalDate localDate = LocalDate.now();
 	
 		return listPatient.stream().filter(p -> Period.between(p.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), localDate).getYears()>=startAge &&
-				Period.between(p.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), localDate).getYears()<=endAge).toList();
+				Period.between(p.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), localDate).getYears()<=endAge).collect(Collectors.toList());
 		
 	}
 }
