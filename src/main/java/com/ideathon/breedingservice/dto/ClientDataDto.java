@@ -1,5 +1,6 @@
 package com.ideathon.breedingservice.dto;
 
+import com.ideathon.breedingservice.model.Address;
 import org.bson.types.Binary;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public class ClientDataDto {
     private Binary clientId;
     private String firstName;
     private String lastName;
+    private Address address;
     List<PatientDataDto> pets;
 
     public Binary getClientId() {
@@ -34,6 +36,10 @@ public class ClientDataDto {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public Address getAddress() { return address; }
+
+    public void setAddress(Address address) { this.address = address; }
 
     public List<PatientDataDto> getPets() {
         return pets;
