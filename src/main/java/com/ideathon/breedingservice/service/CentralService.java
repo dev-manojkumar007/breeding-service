@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.ideathon.breedingservice.dto.BreedingRequestDto;
+import com.ideathon.breedingservice.model.PetBreedingRequest;
+import com.ideathon.breedingservice.repo.BreedingRequestRepository;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -30,6 +33,7 @@ public class CentralService {
 
     private ClientRepository clientRepository;
     private PatientRepository patientRepository;
+    private BreedingRequestRepository breedingRequestRepository;
     
     
     @Autowired
@@ -44,6 +48,11 @@ public class CentralService {
     @Autowired
     public void setPatientRepository(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
+    }
+
+    @Autowired
+    public void setBreedingRequestRepository(BreedingRequestRepository breedingRequestRepository) {
+        this.breedingRequestRepository = breedingRequestRepository;
     }
 
     public ClientDataDto getClientData(String email) {
@@ -61,6 +70,9 @@ public class CentralService {
         clientDataDto.setClientId(targetClient.getId());
         clientDataDto.setFirstName(targetClient.getGivenName());
         clientDataDto.setLastName(targetClient.getFamilyName());
+        if(targetClient.getAddresses().size() != 0) {
+            clientDataDto.setAddress(targetClient.getAddresses().stream().findFirst().get());
+        }
 
         List<Patient> pets = getPatientsByClientId(targetClient.getId());
 
@@ -153,6 +165,24 @@ public class CentralService {
         }
         
         return patientDataDtoList;
+    }
+
+    public boolean processBreedingRequest(BreedingRequestDto breedingRequestDto) {
+
+        try {
+            PetBreedingRequest petBreedingRequest = new PetBreedingRequest();
+
+            petBreedingRequest.setSenderClientId(breedingRequestDto.getSenderClientId());
+            petBreedingRequest.setSenderPatientId(breedingRequestDto.getSenderPatientId());
+            petBreedingRequest.setReceiverClientId(breedingRequestDto.getReceiverClientId());
+            petBreedingRequest.setReceiverPatientId(breedingRequestDto.getReceiverPatientId());
+
+            breedingRequestRepository.save(petBreedingRequest);
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
     
     private List<Patient> getAge(List<Patient> listPatient, String age) {

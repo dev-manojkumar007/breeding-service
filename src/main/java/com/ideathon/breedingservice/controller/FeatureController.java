@@ -2,12 +2,17 @@ package com.ideathon.breedingservice.controller;
 
 import java.util.List;
 
+import com.ideathon.breedingservice.dto.BreedingRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ideathon.breedingservice.dto.ClientDataDto;
@@ -23,9 +28,6 @@ public class FeatureController {
 	private ClientRepository clientRepository;
 	private PatientRepository patientRepository;
 	private CentralService centralService;
-
-	@Autowired
-	private MongoTemplate mongoTemplate;
 
 	@Autowired
 	public void setClientRepository(ClientRepository clientRepository) {
@@ -54,6 +56,11 @@ public class FeatureController {
 			@RequestParam("clientId") String clientId) {
 
 		return centralService.getPatientData(breedCode, age, weight, healthCondition);
+	}
+
+	@PostMapping("/client/requestBreeding")
+	public Boolean sendBreedingRequestToClient(@RequestBody BreedingRequestDto breedingRequestDto) {
+		return centralService.processBreedingRequest(breedingRequestDto);
 	}
 
 }
