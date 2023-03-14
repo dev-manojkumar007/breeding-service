@@ -1,5 +1,8 @@
 package com.ideathon.breedingservice.service;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -7,6 +10,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
 
 import com.ideathon.breedingservice.dto.BreedingRequestDto;
 import com.ideathon.breedingservice.model.PetBreedingRequest;
@@ -17,6 +27,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
+import org.w3c.dom.Document;
 
 import com.ideathon.breedingservice.dto.ClientDataDto;
 import com.ideathon.breedingservice.dto.PatientDataDto;
@@ -145,6 +156,7 @@ public class CentralService {
        	query.addCriteria(Criteria.where("weight").gte(weightRange[0]).lt(weightRange[1]));
        	query.addCriteria(Criteria.where("breedCode").is(breedCode));
        	query.addCriteria(Criteria.where("healthConditions").is(healthCondition));
+       	query.limit(500);
        	
        	List<Patient> listPatient = mongoTemplate.find(query,Patient.class);
        	List<Patient> patientWithAgeCheck = getAge(listPatient, age);
@@ -195,4 +207,46 @@ public class CentralService {
 				Period.between(p.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), localDate).getYears()<=endAge).collect(Collectors.toList());
 		
 	}
+    
+    public String[] getLocation(String email) throws Exception{
+        List<Client> clientList = clientRepository.getClientByEmail(email);
+        if(clientList.size() == 0) {
+            //  Logger.info("No Client Exist with client email : " + email);
+              return null;
+          }
+
+          Client targetClient = clientList.stream().findFirst().get();
+          String pinCode  = targetClient.getAddresses().get(0).getPostalCode();
+          String city = targetClient.getAddresses().get(0).getCity();
+          String address = pinCode + city;
+          
+          int responseCode = 0;
+  	    String api = "https://maps.googleapis.com/maps/api/geocode/xml?address=" + URLEncoder.encode(address, "UTF-8") + "&key=AIzaSyDDVVVnabXlP46hKdf37_12Nd2NCpCb3rY";
+  	    URL url = new URL(api);
+  	    HttpURLConnection httpConnection = (HttpURLConnection)url.openConnection();
+  	    httpConnection.connect();
+  	    responseCode = httpConnection.getResponseCode();
+  	    if(responseCode == 200)
+  	    {
+  	      DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();;
+  	      Document document = builder.parse(httpConnection.getInputStream());
+  	      XPathFactory xPathfactory = XPathFactory.newInstance();
+  	      XPath xpath = xPathfactory.newXPath();
+  	      XPathExpression expr = xpath.compile("/GeocodeResponse/status");
+  	      String status = (String)expr.evaluate(document, XPathConstants.STRING);
+  	      if(status.equals("OK"))
+  	      {
+  	         expr = xpath.compile("//geometry/location/lat");
+  	         String latitude = (String) expr.evaluate(document, XPathConstants.STRING);
+  	         expr = xpath.compile("//geometry/location/lng");
+  	         String longitude = (String) expr.evaluate(document, XPathConstants.STRING);
+  	         return new String[] {latitude, longitude};
+  	      }
+  	      else
+  	      {
+  	         throw new Exception("Error from the API - response status: "+status);
+  	      }
+  	    }
+  	    return null;
+    }
 }

@@ -12,6 +12,8 @@ public class ClientDataDto {
     private String lastName;
     private Address address;
     List<PatientDataDto> pets;
+    private double latitude;
+    private double longitude;
 
     public Binary getClientId() {
         return clientId;
@@ -48,4 +50,21 @@ public class ClientDataDto {
     public void setPets(List<PatientDataDto> pets) {
         this.pets = pets;
     }
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+    
 }

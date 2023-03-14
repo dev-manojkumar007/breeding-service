@@ -57,6 +57,11 @@ public class FeatureController {
 
 		return centralService.getPatientData(breedCode, age, weight, healthCondition);
 	}
+	
+	@GetMapping("/client/location/email/{email}")
+	public String[] getLocation(@PathVariable String email) throws Exception{
+		return centralService.getLocation(email);
+	}
 
 	@PostMapping("/client/requestBreeding")
 	public Boolean sendBreedingRequestToClient(@RequestBody BreedingRequestDto breedingRequestDto) {
